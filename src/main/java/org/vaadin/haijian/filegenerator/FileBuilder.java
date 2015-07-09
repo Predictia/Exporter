@@ -101,14 +101,29 @@ public abstract class FileBuilder implements Serializable {
 
     }
 
+    private static final int PAGE_SIZE = 50;
+    
     private void buildRows() {
-        if (container == null || container.getItemIds().isEmpty()) {
-            return;
-        }
-        for (Object itemId : container.getItemIds()) {
-            onNewRow();
-            buildRow(itemId);
-        }
+    	if (container == null){
+    		return;
+    	}
+    	if(container instanceof Container.Indexed){
+    		int startIndex = 0;
+    		int totalSize = container.size();
+    		while(startIndex < totalSize){
+    			int fetchSize = Math.min(totalSize, PAGE_SIZE);
+    			for (Object itemId : ((Container.Indexed) container).getItemIds(startIndex, fetchSize)) {
+                    onNewRow();
+                    buildRow(itemId);
+                }
+    			startIndex += fetchSize;
+    		}
+    	}else{
+    		for (Object itemId : container.getItemIds()) {
+                onNewRow();
+                buildRow(itemId);
+            }
+    	}
     }
 
     private void buildRow(Object itemId) {
