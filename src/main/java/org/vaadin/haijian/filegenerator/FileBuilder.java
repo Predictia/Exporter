@@ -152,7 +152,7 @@ public abstract class FileBuilder implements Serializable {
            
     		Converter<String, Object> converter = table != null ? table.getConverter(propertyId) : null;
     		if (converter != null && modelValue != null) {
-    			presentationValue = converter.convertToPresentation(property.getValue(), locale);
+    			presentationValue = converter.convertToPresentation(property.getValue(), String.class, locale);
     		}
     		
             onNewCell();
