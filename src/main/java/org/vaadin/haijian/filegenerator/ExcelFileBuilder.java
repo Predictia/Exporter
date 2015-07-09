@@ -20,7 +20,8 @@ import com.vaadin.data.Container;
 import com.vaadin.ui.Table;
 
 public class ExcelFileBuilder extends FileBuilder {
-    private static final String DATE_CELL_STYLE = "m/d/yy h:mm";
+	private static final long serialVersionUID = 1L;
+
     private Workbook workbook;
     private Sheet sheet;
     private int rowNr;
