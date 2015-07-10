@@ -124,7 +124,7 @@ public abstract class FileBuilder implements Serializable {
     		int startIndex = 0;
     		int totalSize = container.size();
     		while(startIndex < totalSize){
-    			int fetchSize = Math.min(totalSize, PAGE_SIZE);
+    			int fetchSize = Math.min(totalSize-startIndex, PAGE_SIZE);
     			for (Object itemId : ((Container.Indexed) container).getItemIds(startIndex, fetchSize)) {
                     onNewRow();
                     buildRow(itemId);
