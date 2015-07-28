@@ -40,10 +40,6 @@ public class ExporterUI extends UI {
 	        pdfExporter.setCaption("Export to PDF");
 	        pdfExporter.setWithBorder(false);
 	        layout.addComponent(pdfExporter);
-	        
-	        excelExporter.setDownloadFileName("demo-excel-exporter");
-	        pdfExporter.setDownloadFileName("demo-pdf-exporter.pdf");
-	        csvExporter.setDownloadFileName("demo-csv-exporter.csv");
 		} catch (UnsupportedOperationException e) {
 			e.printStackTrace();
 		} catch (ParseException e) {

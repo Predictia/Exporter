@@ -8,25 +8,26 @@ import java.util.Locale;
 import org.vaadin.haijian.filegenerator.FileBuilder;
 
 import com.vaadin.data.Container;
-import com.vaadin.server.FileDownloader;
+import com.vaadin.server.BrowserWindowOpener;
 import com.vaadin.server.StreamResource;
 import com.vaadin.server.StreamResource.StreamSource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Table;
 
 public abstract class Exporter extends Button implements StreamSource {
-	private static final long serialVersionUID = 1L;
-
+	
+	private static final long serialVersionUID = -7103659975135937361L;
+	
 	protected FileBuilder fileBuilder;
-    private FileDownloader fileDownloader;
     private Locale locale;
     private String dateFormatString;
     protected String downloadFileName;
 
     public Exporter() {
-        fileDownloader = new FileDownloader(new StreamResource(this,
-                getDownloadFileName()));
-        fileDownloader.extend(this);
+    	BrowserWindowOpener bwo = new BrowserWindowOpener(
+    		new StreamResource(this, getDownloadFileName())
+    	);
+		bwo.extend(this);
     }
 
     public Exporter(Table table) {
@@ -98,11 +99,6 @@ public abstract class Exporter extends Button implements StreamSource {
 
     protected abstract String getDownloadFileName();
     
-    public void setDownloadFileName(String fileName){
-    	downloadFileName = fileName;
-    	((StreamResource)fileDownloader.getFileDownloadResource()).setFilename(getDownloadFileName());
-    }
-
     @Override
     public InputStream getStream() {
         try {
